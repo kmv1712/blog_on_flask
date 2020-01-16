@@ -3,6 +3,14 @@ sudo apt-get install mysql-server
 
 Задать пароль пользователя БД
 
+Ошибка: ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (13)
+Лечится:
+sudo mkdir /var/run/mysqld
+sudo mkfifo /var/run/mysqld/mysqld.sock
+sudo chown -R mysql /var/run/mysqld/
+sudo /etc/init.d/mysql start
+sudo mysql -u root
+
 Зайти
 mysql -u user -p
 
@@ -12,7 +20,26 @@ create database test1 character set utf8 collate utf8_unicode_ci;
 virtualenv venv
 Избегать кириллицы в пути до виртуальной среды
 
+В MySQL
+show databases; - посмотреть таблички.
 
 model 
 views отображение 
 controler получение запроса, обработка, отправка
+
+Зачем нужен __init__(self, ...)
+Ответ: Конструктор класса.
+
+Зачем нужен __repr__(self)?
+Ответ: Для читаемого вывода информации элементов объекта
+прим:
+без __repr__ вывод <__main__.Post object at 0x7f24267c7320>
+c __repr__(self)
+вывод <Post id: b, title: a>
+код:
+class Post:
+...     def __init__(self, title, body):
+...         self.body = body
+...         self.title = title
+...     def __repr__(self): # ()
+...         return '<Post id: {}, title: {}>'.format(self.body, self.title)
