@@ -16,3 +16,9 @@ virtualenv venv
 model 
 views отображение 
 controler получение запроса, обработка, отправка
+
+Установить sqlalchemy
+pip install flask-sqlalchemy mysql-connector
+
+Соотнести карту и територию этот процесс кручения, вертения и есть mapping
+
