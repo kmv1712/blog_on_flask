@@ -23,12 +23,12 @@ virtualenv venv
 В MySQL
 show databases; - посмотреть таблички.
 
+Установить sqlalchemy
+pip install flask-sqlalchemy mysql-connector
+
 model 
 views отображение 
 controler получение запроса, обработка, отправка
-
-Установить sqlalchemy
-pip install flask-sqlalchemy mysql-connector
 
 Соотнести карту и територию этот процесс кручения, вертения и есть mapping
 
@@ -48,3 +48,21 @@ class Post:
 ...         self.title = title
 ...     def __repr__(self): # ()
 ...         return '<Post id: {}, title: {}>'.format(self.body, self.title)
+
+
+*args - список позиционных аргументов.
+**kwargs - словарь именнованых параметро.
+
+class Post(db.Model):
+
+    def __init__(self, *args, **kwargs):
+        # Model класс предок класса Post, чтобы вызвать конструктор предка используем super()
+        super(Post, self).__init__(*args, **kwargs)
+
+У SQLAlhemy в консоли python
+from app import db
+db.create_all() # Создаст таблицы по данным описаным в models
+Ошибка:
+ Access denied for user 'root'@'localhost'
+Решение:
+

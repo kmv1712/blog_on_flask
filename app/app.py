@@ -2,7 +2,7 @@ from flask import Flask
 from config import Configuration
 from flask_sqlalchemy import SQLAlchemy
 
-from app.posts.blueprint import posts
+from posts.blueprint import posts
 
 app = Flask(__name__)
 app.config.from_object(Configuration)
