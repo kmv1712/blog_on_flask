@@ -13,6 +13,16 @@ sudo mysql -u root
 
 Зайти
 mysql -u user -p
+Если возникнут проблемы с паролем пользователя помогло 
+https://ubuntugeeks.com/questions/6655/mysql-doesnt-ask-for-root-password-when-installing
+$ sudo mkdir /var/run/mysqld; sudo chown mysql /var/run/mysqld
+$ sudo mysqld_safe --skip-grant-tables
+$ sudo mysql --user=root mysq
+mysql> update user set authentication_string=PASSWORD('new-password') where user='root';
+flush privileges;
+$ sudo service mysql stop
+$ sudo service mysql start
+
 
 Создать свою БД 
 create database test1 character set utf8 collate utf8_unicode_ci;
@@ -65,4 +75,13 @@ db.create_all() # Создаст таблицы по данным описаны
 Ошибка:
  Access denied for user 'root'@'localhost'
 Решение:
+(мне помогло из https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost)
+А именно:
+$ sudo mysql -u root # I had to use "sudo" since is new installation
 
+mysql> USE mysql;
+mysql> UPDATE user SET plugin='mysql_native_password' WHERE User='root';
+mysql> FLUSH PRIVILEGES;
+mysql> exit;
+
+$ service mysql restart
