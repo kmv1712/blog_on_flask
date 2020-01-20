@@ -34,3 +34,7 @@ class Post(db.Model):
     def __repr__(self):
         return '<Post id: {}, title: {}>'.format(self.id, self.title)
 
+
+class Tag(db.Model):
+    id = db.Colomn(db.Integer, primary_key=True)
+    name = db.Colomn(db.)

@@ -76,6 +76,13 @@ db.create_all() # Создаст таблицы по данным описаны
  Access denied for user 'root'@'localhost'
 Решение:
 (мне помогло из https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost)
+from models import Post
+p = Post(title='First post', body='First post body')
+db.session.add(p)
+db.session.commit()
+p
+
+
 А именно:
 $ sudo mysql -u root # I had to use "sudo" since is new installation
 
@@ -85,3 +92,9 @@ mysql> FLUSH PRIVILEGES;
 mysql> exit;
 
 $ service mysql restart
+
+
+Миграции переход от одной структуры данных к другой.
+
+pip install flask-migrate
+pip install flask-script
