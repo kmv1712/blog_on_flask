@@ -41,7 +41,7 @@ show databases; - посмотреть таблички.
 Установить sqlalchemy
 pip install flask-sqlalchemy mysql-connector
 
-model 
+model
 views отображение 
 controler получение запроса, обработка, отправка
 
@@ -137,3 +137,19 @@ tags = db.relationship('Tag', secondary=post_tags, backref=db.backref('posts', l
 db.relationship('Tag', secondary=post_tags, backref=db.backref('posts', lazy='dynamic'))
 lazy='dynamic' говорит нам что будет возвращен класс BaseQuery
 
+# Для работы в flask c html формами удобно использовать плагин для flask
+pip install wtforms
+
+Формы
+Добавляем в posts файл forms.py
+Добавить обработчик
+
+!Порядок расположение вьюх имеет значение
+
+Чтобы обрабатывать Post запросы надо добавить в декоратор methods=['POST', 'GET']
+@posts.route('/create', methods=['POST', 'GET'])
+
+from app import db # db экземпляр класса sqlAlhemy
+
+Post.query.all() # Выведет все посты
+Post.query.order_by(Post.created.desc()) # отсортирует все посты от последней даты добавления до первой
