@@ -30,7 +30,12 @@ create database test1 character set utf8 collate utf8_unicode_ci;
 virtualenv venv
 Избегать кириллицы в пути до виртуальной среды
 
-В MySQL
+Команды в MySQL
+use test1; - выбрать БД
+shell> mysql -h host -u user -p menagerie - тоже, что и use только из командной строки.
+
+show database(); - показать используемую БД.
+show tabels;- показать таблички в БД.
 show databases; - посмотреть таблички.
 
 Установить sqlalchemy
@@ -59,8 +64,13 @@ class Post:
 ...     def __repr__(self): # ()
 ...         return '<Post id: {}, title: {}>'.format(self.body, self.title)
 
+Зачем нужен render_template в Flask? Чтобы вернуть указаный шаблон с парамметрами
 
 *args - список позиционных аргументов.
+def summa(*args):
+    return sum(args)
+summa(1, 2, 3, 4)
+
 **kwargs - словарь именнованых параметро.
 
 class Post(db.Model):
@@ -98,3 +108,31 @@ $ service mysql restart
 
 pip install flask-migrate
 pip install flask-script
+
+Команды миграций:
+python manage.py db init
+
+python manage.py db migrate # Создает файл миграции
+python manage.py db upgrade # Приминить миграцию к БД
+
+
+Один у одному
+Один ко многим
+
+Многие ко многим(ManyToMany)
+ForeignKey(FK)
+Связь многие ко многим реализуется путем создания дополнительной таблицы
+Post-Tag
+post_id tag_1d
+
+# Добавляем табличку для реализации связи многие ко многим для таблиц Post и Tag
+post_tags = db.Table('post_tags',
+                     db.Column('post_id', db.Integer, db.ForeignKey('post.id')),
+                     db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'))
+)
+
+добавляем отношение в Post
+tags = db.relationship('Tag', secondary=post_tags, backref=db.backref('posts', lazy='dynamic'))
+
+db.relationship('Tag', secondary=post_tags, backref=db.backref('posts', lazy='dynamic'))
+lazy='dynamic' говорит нам что будет возвращен класс BaseQuery
