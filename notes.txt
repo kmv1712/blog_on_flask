@@ -136,3 +136,4 @@ tags = db.relationship('Tag', secondary=post_tags, backref=db.backref('posts', l
 
 db.relationship('Tag', secondary=post_tags, backref=db.backref('posts', lazy='dynamic'))
 lazy='dynamic' говорит нам что будет возвращен класс BaseQuery
+
