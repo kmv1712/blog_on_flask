@@ -164,3 +164,32 @@ pages = posts.paginate(page=page, per_page=кол-во ожидаемых пос
 
 # Итератор возвращает страницы в шаблоне
 pages.iter_pages()
+
+Админка
+CRUD
+
+Create
+Read
+Update
+Delete
+
+Изминение данных поста
+# Находим нужные данные по слагу
+post = Post.query.filter(Post.slug==slug).first()
+# Подставляем данные формы request.form и переносим в нее данные из найденого поста obj=post.
+form = PostForm(formdata=request.form, obj=post)
+
+# Заполняет поля формы.
+form.populate_obj(post)
+
+#
+pip install flask-admin
+# Импортировали
+from flask_admin import Admin
+# Вытягиваем объекты из бд.
+admin.add_view(ModelView(Post, db.session))
+admin.add_view(ModelView(Tag, db.session))
+
+admin = Admin(app)
+
+# Для работы нужен SECRET_KEY
