@@ -46,7 +46,12 @@
     </form>
   </div>
   <ul>
-    <li><a href="{{ url_for('posts.create_post') }}">+ New post</a></li>
+    <li>
+      {% if current_user.has_role('admin') %}
+        <a href="/admin">Admin</a>
+      {% endif %}
+    </li>
+<!--    <li><a href="{{ url_for('posts.create_post') }}">+ New post</a></li>-->
   </ul>
 </nav>
   {% block content_title %}

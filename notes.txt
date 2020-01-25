@@ -193,3 +193,7 @@ admin.add_view(ModelView(Tag, db.session))
 admin = Admin(app)
 
 # Для работы нужен SECRET_KEY
+
+
+# Разделение прав
+ pip install flask-security
