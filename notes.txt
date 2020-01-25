@@ -1,3 +1,4 @@
+pip install flask
 Установка mysql
 sudo apt-get install mysql-server
 
